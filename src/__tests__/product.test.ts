@@ -1,5 +1,5 @@
-import supertest from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
+import supertest from "supertest";
 import createServer from "../utils/server";
 import mongoose from "mongoose";
 import { createProduct } from "../service/product.service";
@@ -9,6 +9,12 @@ const app = createServer();
 
 const userId = new mongoose.Types.ObjectId().toString();
 
+export const userPayload = {
+  _id: userId,
+  email: "testuser@example.com",
+  name: "Test user",
+};
+
 export const productPayload = {
   user: userId,
   title: "Title of test product",
@@ -16,12 +22,6 @@ export const productPayload = {
     "Description of test product Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
   price: 99.0,
   image: "https://i.imgur.com/test.jpg",
-};
-
-export const userPayload = {
-  _id: userId,
-  email: "testuser@example.com",
-  name: "Test user",
 };
 
 describe("product", () => {
